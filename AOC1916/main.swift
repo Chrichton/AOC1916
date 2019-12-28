@@ -78,17 +78,35 @@ let basePattern = [0,1,0,-1]
 //
 //print(result)
 
-let signal = """
+let signalString = """
 59791911701697178620772166487621926539855976237879300869872931303532122404711706813176657053802481833015214226705058704017099411284046473395211022546662450403964137283487707691563442026697656820695854453826690487611172860358286255850668069507687936410599520475680695180527327076479119764897119494161366645257480353063266653306023935874821274026377407051958316291995144593624792755553923648392169597897222058613725620920233283869036501950753970029182181770358827133737490530431859833065926816798051237510954742209939957376506364926219879150524606056996572743773912030397695613203835011524677640044237824961662635530619875905369208905866913334027160178
 """
-    .map{ Int(String($0))! }
 
-let startingPoint = Date()
+//let signal = signalString
+//    .map{ Int(String($0))! }
+//
+//let startingPoint = Date()
+//
+//let result = (1...100).reduce(signal){ accu, _ in
+//    getNextSequence(signal: accu, basePattern: basePattern)
+//}
+//
+//print(result.prefix(8).map{ String($0) }.joined())
+//
+//print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
 
-let result = (1...100).reduce(signal){ accu, _ in
-    getNextSequence(signal: accu, basePattern: basePattern)
+// ----------------------------------
+
+let signal2: [Int] = String(repeating: signalString, count: 10000).map{ Int(String($0))! }
+
+let startingPoint2 = Date()
+
+let result2 = (1...100).reduce(signal2){ accu, current in
+        print(current, "  \(startingPoint2.timeIntervalSinceNow * -1) seconds elapsed")
+    
+    return getNextSequence(signal: accu, basePattern: basePattern)
 }
 
-print(result.prefix(8).map{ String($0) }.joined())
+print(result2.prefix(8).map{ String($0) }.joined())
 
-print("\(startingPoint.timeIntervalSinceNow * -1) seconds elapsed")
+print("\(startingPoint2.timeIntervalSinceNow * -1) seconds elapsed")
